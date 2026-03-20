@@ -1,6 +1,7 @@
 package com.example.guestservicesapp.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -25,10 +26,11 @@ fun ColorFeatureCard(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
-    val gradient = Brush.verticalGradient(
+    // More vibrant gradient: Accent to a very soft tint of the accent
+    val gradient = Brush.linearGradient(
         colors = listOf(
-            accent.copy(alpha = 0.12f),
-            Color.White
+            accent.copy(alpha = 0.25f),
+            accent.copy(alpha = 0.05f)
         )
     )
 
@@ -37,14 +39,19 @@ fun ColorFeatureCard(
             .fillMaxWidth()
             .height(120.dp)
             .clip(RoundedCornerShape(28.dp))
+            .border(
+                width = 1.dp,
+                brush = Brush.linearGradient(listOf(accent.copy(alpha = 0.3f), Color.Transparent)),
+                shape = RoundedCornerShape(28.dp)
+            )
             .clickable(
                 interactionSource = interactionSource,
                 indication = null,
                 onClick = onClick
             ),
         shape = RoundedCornerShape(28.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.Transparent)
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Column(
             modifier = Modifier
@@ -53,17 +60,18 @@ fun ColorFeatureCard(
                 .padding(16.dp),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            /* icon container - Rounded and defined */
+            /* icon container - More defined with elevation and stronger colors */
             Surface(
                 shape = RoundedCornerShape(18.dp),
-                color = accent.copy(alpha = 0.20f),
+                color = accent,
+                tonalElevation = 4.dp,
                 modifier = Modifier.size(46.dp)
             ) {
                 Box(
                     contentAlignment = Alignment.Center,
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    CompositionLocalProvider(LocalContentColor provides accent) {
+                    CompositionLocalProvider(LocalContentColor provides Color.White) {
                         icon()
                     }
                 }
@@ -73,8 +81,8 @@ fun ColorFeatureCard(
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Black,
-                color = Color.Black.copy(alpha = 0.85f),
+                fontWeight = FontWeight.ExtraBold,
+                color = MaterialTheme.colorScheme.onSurface,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.padding(bottom = 2.dp)
