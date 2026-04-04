@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+/* If you have any custom gold/royal colors from earlier, keep them here: */
+@theme {
+  --color-gold: #D4AF37;
+  --color-royal-blue: #1A237E;
+  --color-luxury-black: #0A0A0A;
+}
