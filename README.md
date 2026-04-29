@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Hotel Management WebApp + Android App 
 =======
 # 7-Star Hotel & Visitor Management System 🏨
